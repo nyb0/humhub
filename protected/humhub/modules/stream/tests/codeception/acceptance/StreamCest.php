@@ -128,7 +128,7 @@ class StreamCest
 
         $I->createPost('This is my second stream test post!');
 
-        $newEntrySelector2 = '[data-content-key="17"]';
+        $newEntrySelector2 = '[data-stream-entry]:nth-of-type(3)';
         $I->waitForElementVisible($newEntrySelector2);
         $I->expectTo('my new post beeing the latest entry');
         $I->waitForText('This is my second stream test post', null, '.s2_streamContent div:nth-child(1)');
@@ -274,6 +274,7 @@ class StreamCest
         $I->amGoingTo('reactivate the involved filter.');
         $I->expectTo('see the commented post after the stream reload.');
 
+        $I->scrollTop();
         $I->click('[data-filter-id="entry_userinvolved"]');
         $I->wait(1);
         $I->waitForText('Involved Post.');
@@ -309,7 +310,7 @@ class StreamCest
         $I->see('POST2', '.s2_streamContent > [data-stream-entry]:nth-of-type(4)');
         $I->see('POST1', '.s2_streamContent > [data-stream-entry]:nth-of-type(5)');
 
-        $post4Selector = '[data-stream-entry][data-content-key="21"]';
+        $post4Selector = '[data-stream-entry]:nth-of-type(2)';
 
         $I->click('Comment', $post4Selector);
         $I->wait(1);
